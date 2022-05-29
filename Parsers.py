@@ -33,10 +33,10 @@ def ControllerToMarkdown(ctrl: Controller) -> str:
     #Description = "{replacethisfornow}"
 
     Parameters = ""
-    if ctrl.Parameters is not None:
-        Parameters = "### Parameters\n| Name | Type |\n|---|---|\n"
-        for Param in ctrl.Parameters:
-            Parameters += f"| {Param[0]} | {Param[1]} |\n"
+    # if ctrl.Parameters is not None:
+    #     Parameters = "### Parameters\n| Name | Type |\n|---|---|\n"
+    #     for Param in ctrl.Parameters:
+    #         Parameters += f"| {Param[0]} | {Param[1]} |\n"
 
     Result = ""
     if ctrl.Response is not None:
