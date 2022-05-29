@@ -1,0 +1,523 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "DSJ-API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "API"
+        ],
+        "operationId": "GetAPI",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Benchmarks": {
+      "get": {
+        "tags": [
+          "Benchmark"
+        ],
+        "operationId": "GetBenchmarks",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Benchmark"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Benchmark"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Benchmark"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Birthdays": {
+      "get": {
+        "tags": [
+          "Birthdays"
+        ],
+        "operationId": "GetBirthdays",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Birthday"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Birthday"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Birthday"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Economy/GetAll": {
+      "get": {
+        "tags": [
+          "Economy"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BankAccount"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BankAccount"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BankAccount"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Economy/GetOne": {
+      "get": {
+        "tags": [
+          "Economy"
+        ],
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccount"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccount"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccount"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Economy/PostOne": {
+      "post": {
+        "tags": [
+          "Economy"
+        ],
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Amount",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Misc/GetAll": {
+      "get": {
+        "tags": [
+          "Miscellaneous"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Miscellaneous"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Miscellaneous"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Miscellaneous"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Misc/GetOne": {
+      "get": {
+        "tags": [
+          "Miscellaneous"
+        ],
+        "parameters": [
+          {
+            "name": "DiscordID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Miscellaneous"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Miscellaneous"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Miscellaneous"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Misc/StreakPlusOne": {
+      "put": {
+        "tags": [
+          "Miscellaneous"
+        ],
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Misc/PostOne": {
+      "post": {
+        "tags": [
+          "Miscellaneous"
+        ],
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Streak",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Quotes/GetAll": {
+      "get": {
+        "tags": [
+          "Quotes"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cite"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cite"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cite"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Quotes/PostOne": {
+      "post": {
+        "tags": [
+          "Quotes"
+        ],
+        "parameters": [
+          {
+            "name": "discord_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "quote",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BankAccount": {
+        "type": "object",
+        "properties": {
+          "discordID": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "bank": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Benchmark": {
+        "type": "object",
+        "properties": {
+          "score": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cpu": {
+            "type": "string",
+            "nullable": true
+          },
+          "gpu": {
+            "type": "string",
+            "nullable": true
+          },
+          "device": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "owner": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Birthday": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "discordID": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Cite": {
+        "type": "object",
+        "properties": {
+          "quote": {
+            "type": "string",
+            "nullable": true
+          },
+          "discordID": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Miscellaneous": {
+        "type": "object",
+        "properties": {
+          "discordID": {
+            "type": "string",
+            "nullable": true
+          },
+          "loginStreak": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

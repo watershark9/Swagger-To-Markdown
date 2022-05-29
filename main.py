@@ -1,17 +1,9 @@
-from Response import Controller
-from json import loads, dumps
+from json import loads
+from Parsers import SwaggerParser, ControllerToMarkdown
 data = loads(open("swagger.json", "r").read())
 
-x = []
+Controllers = [SwaggerParser(Key, Value) for Key, Value in data["paths"].items()]
+MarkdownControllers = [ControllerToMarkdown(control) for control in Controllers]
 
-for Key, Value in data["paths"].items():
-    path = Key
-    req = list(Value.keys())[0]
-    try:
-        res = next(iter(Value.values()))["responses"]["200"]["content"]["application/json"]["schema"]
-        res = dumps(res, indent=4, sort_keys=True)
-    except:
-        res = None
-    x.append(Controller(Key, req, res))
-    print(res)
-print(path)
+with open("swagger.md", "w") as sw:
+    sw.write("\n".join(MarkdownControllers).replace("\n\n","\n"))
