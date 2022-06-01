@@ -7,6 +7,7 @@ def SwaggerParser(Key, Value) -> Controller:
     request = list(Value.keys())[0]
     response = None
     parameters = []
+    description = ""
     
     try:
         res = next(iter(Value.values()))["responses"]["200"]["content"]["application/json"]["schema"]
@@ -24,13 +25,13 @@ def SwaggerParser(Key, Value) -> Controller:
             parameters.append((par["name"],val))
     except:
         par = None
+    description = next(iter(Value.values()))["summary"]
         
-    return Controller(Key, request, response, parameters)
+    return Controller(Key, request, response, parameters, description)
 
 def ControllerToMarkdown(ctrl: Controller) -> str:
-    Head = f"## `{ctrl.Path}` - **{ctrl.Request}**\n"
-    Description = ""
-    #Description = "{replacethisfornow}"
+    Head = f"## `{ctrl.Path}` - **{ctrl.Request}**"
+    Description = ctrl.Description
 
     Parameters = ""
     if ctrl.Parameters is not None:
@@ -42,4 +43,4 @@ def ControllerToMarkdown(ctrl: Controller) -> str:
     # if ctrl.Response is not None:
     #     Result = f"### Result\n```json\n{ctrl.Response}\n```"
 
-    return f"""{Head}\n{Description}\n{Parameters}\n{Result}"""
+    return f"{Head}\n{Description}\n{Parameters}\n{Result}"
