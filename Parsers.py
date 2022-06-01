@@ -3,11 +3,12 @@ from Response import Controller
 def SwaggerParser(Key, Value) -> Controller:
     from json import dumps
 
-    path = Key
+    # path = Key
     request = list(Value.keys())[0]
     response = None
     parameters = []
     description = ""
+    group = ""
     
     try:
         res = next(iter(Value.values()))["responses"]["200"]["content"]["application/json"]["schema"]
@@ -26,21 +27,34 @@ def SwaggerParser(Key, Value) -> Controller:
     except:
         par = None
     description = next(iter(Value.values()))["summary"]
-        
-    return Controller(Key, request, response, parameters, description)
+    group = next(iter(Value.values()))["tags"][0]
 
-def ControllerToMarkdown(ctrl: Controller) -> str:
-    Head = f"## `{ctrl.Path}` - **{ctrl.Request}**"
-    Description = ctrl.Description
+    return Controller(Key, request, response, parameters, description, group)
 
-    Parameters = ""
-    if ctrl.Parameters is not None:
-        Parameters = "### Parameters\n| Name | Type |\n|---|---|\n"
-        for Param in ctrl.Parameters:
-            Parameters += f"| {Param[0]} | {Param[1]} |\n"
+def GetControllerList(lstCtrl: list) -> list:
+    list = set()
+    for controller in lstCtrl:
+        if controller.Controller not in list:
+            list.add(controller.Controller)
+    return list
 
-    Result = ""
-    # if ctrl.Response is not None:
-    #     Result = f"### Result\n```json\n{ctrl.Response}\n```"
+def ControllerDictionary(lstCtrl: list) -> dict:
+    dictx = {}
+    for key in GetControllerList(lstCtrl):
+        dictx[key] = []
+    for controller in lstCtrl:
+        dictx[controller.Controller].append(controller)
+    return dictx
 
-    return f"{Head}\n{Description}\n{Parameters}\n{Result}"
+def ControllerDictToMarkdown(lstCtrl: dict) -> str:
+    values = ""
+    for Key, Values in lstCtrl.items():
+        Section = f"## {Key}\n"
+        Content = ""
+        if isinstance(Values, list):
+            for value in Values:
+                Content += value.ToMarkdown() + "\n"
+        else:
+            Content += Values + "\n"
+        values += Section + Content
+    return values
