@@ -152,3 +152,4 @@ cython_debug/
 #.idea/
 swagger.md
 swagger.json
+.vs/
